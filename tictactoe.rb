@@ -19,6 +19,14 @@ class Board
 		puts @data.inspect
 	end
 
+	def all_squares_marked?
+		empty_squares.size == 0 
+	end
+
+	def empty_squares
+		@data.select {|_, square| square.value == ' '}.values
+	end
+
 # Board
 # 	-square
 # 	-all_squares_marked?
@@ -27,11 +35,11 @@ class Board
 end
 
 class Square
+	attr_accessor :value
 
 	def initialize(value)
 		@value = value
 	end
-
 end
 
 
