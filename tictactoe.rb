@@ -7,18 +7,55 @@
 	# Play continues until 3 of the same matching symbol are aligned or until all squares are taken.
 
 
+class Board 
 
-Board
-	-square
-	-all_squares_marked?
-	-find all empty squares
+	def initialize
+		@data = {}
+		(1..9).each {|position| @data[position] = Square.new(' ')}
+	end
 
-Player
-	-name
-	-marker
+	def draw 
+		puts "Drawing board..."
+		puts @data.inspect
+	end
 
-Square
-	-occupied
-	-mark(marker)
+# Board
+# 	-square
+# 	-all_squares_marked?
+# 	-find all empty squares
 
-Game
+end
+
+class Square
+
+	def initialize(value)
+		@value = value
+	end
+
+end
+
+
+board = Board.new
+board.draw
+
+# class Player 
+
+# 	def initialize
+# 	end
+
+# # Player
+# # 	-name
+# # 	-marker
+
+# end
+
+
+
+# Square
+# 	-occupied
+# 	-mark(marker)
+
+class Game
+	def initialize
+	end
+end
