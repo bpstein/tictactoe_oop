@@ -27,10 +27,13 @@ class Board
 		@data.select {|_, square| square.value == ' '}.values
 	end
 
-# Board
-# 	-square
-# 	-all_squares_marked?
-# 	-find all empty squares
+	def empty_positions
+	 @data.select {|_, square| !square.empty?}.keys
+	end
+	
+	def mark_square(position, marker)
+		@data[postion].mark(marker)
+	end
 
 end
 
@@ -40,30 +43,53 @@ class Square
 	def initialize(value)
 		@value = value
 	end
+
+	def mark(marker)
+		@value = marker
+	end
+
+	def occupied?
+		@value != ' '
+	end
+
+	def empty?
+		@value == ' '
+	end
+end
+
+class Player
+	attr_reader :marker
+	def initialize(name, marker)
+		@name = name
+		@marker = marker
+	end
 end
 
 
-board = Board.new
-board.draw
-
-# class Player 
-
-# 	def initialize
-# 	end
-
-# # Player
-# # 	-name
-# # 	-marker
-
-# end
-
-
-
-# Square
-# 	-occupied
-# 	-mark(marker)
-
 class Game
 	def initialize
+		@board = Board.new
+		@human = Player.new("Ben", "X")
+		@computer = Player.new("C-3P0", "O")
+		@current_player = @human
+	end
+
+	def current_player_marks_square
+		if @current_player == @human
+			begin 
+				puts "Choose a positin (1-9):"
+				position = gets.chomp.to_i
+			end until @board.empty_positions.include?(position)
+		else
+			position = @board.empty_positions.sample
+		end
+		@board.mark_square(position, @current_player.marker)
+	end
+
+	def play
+		@board.draw
+		loop do 
+			current_player_marks_square
+		end
 	end
 end
