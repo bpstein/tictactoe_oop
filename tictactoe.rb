@@ -15,8 +15,18 @@ class Board
 	end
 
 	def draw 
-		puts "Drawing board..."
-		puts @data.inspect
+		system 'clear'
+		puts 
+		puts "			|				|"
+		puts "	#{@data[1]} 	|		#{@data[2]} 	| #{@data[3]}"
+		puts "			|				|"
+		puts "______+_______+_______"
+		puts "	#{@data[4]} 	|		#{@data[5]} 	| #{@data[6]}"
+		puts "			|				|"
+		puts "______+_______+_______"
+		puts "			|				|"
+		puts "	#{@data[7]} 	|		#{@data[8]} 	| #{@data[9]}"
+		puts "			|				|"
 	end
 
 	def all_squares_marked?
@@ -86,6 +96,14 @@ class Game
 		@board.mark_square(position, @current_player.marker)
 	end
 
+	def alternate_player
+		if @current_player == @human
+			@current_player = @computer
+		else
+			@current_player = @human
+		end
+	end
+
 	def play
 		@board.draw
 		loop do 
@@ -93,3 +111,5 @@ class Game
 		end
 	end
 end
+
+Game.new.play
